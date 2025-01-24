@@ -1,5 +1,8 @@
 import pool from './connection';
 
+
+// placerholder data for seeding database
+//remove when using actuall data
 async function seedDatabase() {
   try {
     // Insert Users with different types
