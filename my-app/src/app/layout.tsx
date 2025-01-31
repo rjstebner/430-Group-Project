@@ -17,7 +17,9 @@ export default function RootLayout({
   return (
     <SessionWrapper>
       <html lang="en">
-        <body className={`${roboto.className} antialiased`}>
+        <body
+          className={`${roboto.className} antialiased w-full flex flex-col justify-center`}
+        >
           <Header />
           {children}
         </body>

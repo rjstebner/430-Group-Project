@@ -1,4 +1,5 @@
 import pool from './connection';
+import { User } from './types';
 
 //the place to put actions for accessing the db
 export async function getUser(email: string): Promise<User | undefined> {

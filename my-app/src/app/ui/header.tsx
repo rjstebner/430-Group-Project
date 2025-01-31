@@ -27,7 +27,10 @@ export default function Header() {
           </div>
         ) : (
           <div>
-            <Link href="/login" className="text-[#F2E9E4] hover:underline">
+            <Link
+              href="api/auth/signin"
+              className="text-[#F2E9E4] hover:underline"
+            >
               <UserIcon className="text-[#F2E9E4] size-3 inline me-1" />
               Login
             </Link>

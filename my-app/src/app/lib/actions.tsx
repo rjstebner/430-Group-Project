@@ -1,30 +1,37 @@
 'use server';
+import bcrypt from 'bcrypt';
+import { validateCreateUserForm } from './validations';
+import moment from 'moment';
+import { insertUser, insertSocialUser } from '../db/queries';
+import { redirect } from 'next/navigation';
 
-import { z } from 'zod';
+function getCurrentDate() {
+  const date = moment();
+  const currentDate = date.format('MM/DD/YYYY');
+  return currentDate;
+}
 
-const loginFormSchema = z.object({
-  email: z
-    .string({
-      required_error: 'Email is required',
-    })
-    .email({
-      message: 'Invalid email format',
-    }),
-  password: z
-    .string({
-      required_error: 'Password is required',
-    })
-    .min(6, { message: 'Password must have at least 6 characters' }),
-});
-
-export async function authenticate(state, formData) {
-  const valdiationResult = loginFormSchema.safeParse({
+export async function createUser(formData: FormData) {
+  //safe parsing
+  const currentDate = getCurrentDate();
+  const userData = validateCreateUserForm.safeParse({
+    id: formData.get('id'),
+    name: formData.get('name'),
     email: formData.get('email'),
-    password: formData.get('password'),
+    password: bcrypt.hashSync(formData.get('password1'), 10),
+    type: 'user',
+    registration_dt: currentDate,
   });
-  if (!valdiationResult.success) {
-    return {
-      errors: valdiationResult.error.flatten().fieldErrors,
-    };
-  }
+
+  console.log(userData);
+  insertUser(userData);
+  redirect('/api/auth/signin');
+}
+
+export async function createSocialUser(name, email) {
+  const currentDate = getCurrentDate();
+  const type = 'user';
+
+  insertSocialUser(name, email, type, currentDate);
+  console.log(userData);
 }
