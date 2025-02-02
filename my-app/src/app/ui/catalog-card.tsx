@@ -1,4 +1,9 @@
-export default function CatalogCard() {
+import { fetchProducts } from "../db/queries"
+
+export default async function CatalogCard() {
+    const products = await fetchProducts();
+    console.log(products);
+
     return (
         <div>
             <h2>Card Title</h2>
