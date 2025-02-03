@@ -7,9 +7,8 @@ export default async function CatalogCards() {
     return (
         <div className="md:grid grid-cols-3">
             {products.map(product => (
-                <div key={product.id} className="border border-solid bg-gray-100 p-5 m-4">
+                <div key={product.id} className="border border-solid bg-gray-100 p-5 m-4 rounded-xl">
                     <p className="m-3 font-bold">{product.name}</p>
-                    {/* <p className="m-3">{product.description}</p> */}
                     <p className="m-3">${product.price}</p>
                     <Image 
                         src={product.image}
