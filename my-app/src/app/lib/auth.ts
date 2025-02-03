@@ -26,15 +26,16 @@ const providers: Provider[] = [
       },
     },
     async authorize(credentials) {
-      testConnection();
-      getUser(credentials?.email as string);
+      console.log('authorize');
+      await testConnection();
+      const user = await getUser(credentials?.email as string);
+      console.log(user);
       const testing = {
         id: 10,
         name: 'heitor',
         email: 'heitor@gmail.com',
         password: '12345',
       };
-      console.log(credentials);
       if (
         credentials?.email == testing.email &&
         credentials?.password == testing.password
@@ -62,7 +63,10 @@ export const authOptions: NextAuthOptions = {
       return session;
     },
     async signIn({ user, account, profile }) {
+      console.log('signin callback');
       console.log('profile', profile);
+      console.log('user', user);
+      console.log('account', account);
       const result = await getUser(profile.email);
       if (result) {
         return result;
