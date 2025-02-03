@@ -8,15 +8,17 @@ export default async function CatalogCards() {
         <div className="md:grid grid-cols-3">
             {products.map(product => (
                 <div key={product.id} className="border border-solid bg-gray-100 p-5 m-4">
-                    <p>{product.name}</p>
-                    <p>{product.description}</p>
-                    <p>{product.price}</p>
+                    <p className="m-3 font-bold">{product.name}</p>
+                    {/* <p className="m-3">{product.description}</p> */}
+                    <p className="m-3">${product.price}</p>
                     <Image 
                         src={product.image}
                         alt={`${product.name} image`}
-                        width={100}
-                        height={100}
+                        width={200}
+                        height={200}
+                        className="m-auto border border-solid border-gray-300"
                     />
+                    <a href="#" className="block p-3 m-5 bg-blue-300 w-xs rounded-xl text-center">Product Details</a>
                 </div>
             ))}
         </div>
