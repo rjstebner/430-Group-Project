@@ -1,10 +1,10 @@
-import CatalogCard from "./ui/catalog-card";
+import CatalogCards from "./ui/catalog-cards";
 
 export default function Home() {
   return (
     <div>
-      <h1>Hello World!</h1>
-        <CatalogCard />
+      <h1>Catalog</h1>
+      <CatalogCards />
     </div>
   )
 }
