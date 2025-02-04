@@ -13,12 +13,13 @@ export interface Review {
     created_at: Date;
 }
   
-  export interface Product {
-    id: number;
-    name: string;
-    description: string;
-    price: number;
-    image: string;
-    reviews: Review[];
-    created_at: Date;
-  }
+
+export interface Product {
+  id: number;
+  name: string;
+  description: string;
+  price: number;
+  image: string;
+  created_at: Date;
+  owner_id: number;
+}
