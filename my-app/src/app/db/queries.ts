@@ -5,7 +5,7 @@ import { User } from './types';
 //the place to put actions for accessing the db
 export const getUser = async (email: string) => {
   try {
-    const result = await sql`SELECT * FROM users WHERE email=${email}`;
+    const result = await pool.query(`SELECT * FROM users WHERE email=${email}`);
     console.log(result.rows[0]);
     return result.rows[0];
   } catch (error) {
@@ -23,8 +23,8 @@ export async function insertUser(
 ) {
   try {
     const { rows, fields } =
-      await sql`INSERT INTO users (username, email, password, type)
-                VALUES(${name}, ${email}, ${password}, ${type} )`;
+      await pool.query(`INSERT INTO users (username, email, password, type)
+                VALUES(${name}, ${email}, ${password}, ${type} )`);
     console.log(`DB: user inserted succesfuly ${rows[0]}`);
   } catch (err) {
     console.error('Database failed to insert new user:', err);
@@ -38,8 +38,8 @@ export async function insertSocialUser(
   registration_dt: string
 ) {
   try {
-    const { rows } = await sql`INSERT INTO users (username, email, type)
-                VALUES(${name}, ${email} ${type} )`;
+    const { rows } = await pool.query(`INSERT INTO users (username, email, type)
+                VALUES(${name}, ${email} ${type} )`);
     console.log(`DB: user inserted succesfuly ${rows[0]}`);
   } catch (err) {
     console.error('Database failed to insert new user:', err);
