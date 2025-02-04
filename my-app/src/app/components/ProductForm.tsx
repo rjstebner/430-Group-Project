@@ -42,16 +42,34 @@ export default function ProductForm({ product, mode }: ProductFormProps) {
           <input
             type="text"
             value={formData.name}
-            onChange={(e) => setFormData({...formData, name: e.target.value})}
+            onChange={(e) => setFormData({ ...formData, name: e.target.value })}
             className="shadow appearance-none border rounded w-full py-2 px-3"
           />
         </label>
       </div>
-      {/* Add similar fields for description and price */}
-      <button
-        type="submit"
-        className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
-      >
+      <div className="mb-4">
+        <label className="block text-gray-700 text-sm font-bold mb-2">
+          Description
+          <input
+            type="text"
+            value={formData.description}
+            onChange={(e) => setFormData({ ...formData, description: e.target.value })}
+            className="shadow appearance-none border rounded w-full py-2 px-3"
+          />
+        </label>
+      </div>
+      <div className="mb-4">
+        <label className="block text-gray-700 text-sm font-bold mb-2">
+          Price
+          <input
+            type="text"
+            value={formData.price}
+            onChange={(e) => setFormData({ ...formData, price: e.target.value })}
+            className="shadow appearance-none border rounded w-full py-2 px-3"
+          />
+        </label>
+      </div>
+      <button type="submit" className="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded">
         {mode === 'create' ? 'Create' : 'Update'} Product
       </button>
     </form>
