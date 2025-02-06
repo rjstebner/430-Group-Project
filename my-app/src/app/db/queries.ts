@@ -1,6 +1,8 @@
 import pool from './connection';
 import { Product } from './types/index';
 
+export{};
+
 
 export default pool;
 // Get all products query
@@ -59,6 +61,8 @@ export const deleteProduct = async (id: number): Promise<boolean> => {
         return false;
     }
 };
+
+
 //the place to put actions for accessing the db
 export const fetchProducts = async (): Promise<Product[]> => {
     try {
