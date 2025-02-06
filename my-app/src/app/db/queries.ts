@@ -60,16 +60,15 @@ export const deleteProduct = async (id: number): Promise<boolean> => {
     }
 };
 //the place to put actions for accessing the db
-
-export async function fetchProducts() {
+export const fetchProducts = async (): Promise<Product[]> => {
     try {
         const data = await pool.query(`
             SELECT *
             FROM products
         `);
-        return data.rows
+        return data.rows;
     } catch (error) {
-        console.error('Database Error: ', error);
+        console.error('Database Error:', error);
         throw new Error('Failed to fetch product data');
     }
 }
