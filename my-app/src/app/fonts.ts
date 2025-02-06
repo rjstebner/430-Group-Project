@@ -1,5 +1,4 @@
-import { Playwrite_VN } from "next/font/google";
-import { Roboto } from 'next/font/google';
+import { Playwrite_VN ,Roboto } from "next/font/google";
 
 export const roboto = Roboto({
     weight: ['300', '400', '500', '700'],
@@ -7,4 +6,8 @@ export const roboto = Roboto({
     display: 'swap',
     variable: '--font-roboto',
 });
-export const playwrite_vn = Playwrite_VN();
+export const playwriteVn = Playwrite_VN({
+    weight: ['100', '200', '300', '400'],
+    display: 'swap',
+    variable: '--font-playwrite',
+});
