@@ -1,6 +1,8 @@
 import pool from './connection';
 import { Product } from './types/index';
 
+
+export default pool;
 // Get all products query
 export const getAllProducts = async (): Promise<Product[]> => {
     try {
