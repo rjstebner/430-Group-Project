@@ -1,8 +1,9 @@
-import { createUser } from '@/app/lib/actions';
+import { createUser } from "@/app/lib/actions";
 
 export default function Register() {
   return (
-    <div className="border border-[#4A4E69] rounded-md flex flex-col w-xs">
+    <div className="p-2 border border-[#4A4E69] rounded-md flex flex-col w-xs mt-5">
+      <h2 className="text-2xl text-center">Create your account</h2>
       <form className="w-96 p-2 inline-block" action={createUser}>
         <label className="block mt-2" htmlFor="name">
           Name

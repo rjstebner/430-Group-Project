@@ -9,7 +9,7 @@ export const isRegistered = async (email: string) => {
     });
     return foundEmail ? true : false;
   } catch (error) {
-    throw new Error(`MongoDB failed to save user ${error}`);
+    throw new Error(`MongoDB error: ${error}`);
   }
 };
 
@@ -19,13 +19,13 @@ export const findUser = async (email: string) => {
     const result = await User.findOne({
       email: email,
     });
-    if (result.length == 0) {
+    if (!result || result.length == 0) {
       return null;
     } else {
       return result;
     }
   } catch (error) {
-    throw new Error(`MongoDB failed to save user ${error}`);
+    throw new Error(`MongoDB failed to find user ${error}`);
   }
 };
 

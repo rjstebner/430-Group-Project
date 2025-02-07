@@ -1,13 +1,28 @@
-"use client";
-
 import HavenLogo from "@/app/ui/havenLogo";
 import Link from "next/link";
 import { UserIcon } from "@heroicons/react/24/solid";
 import { useSession } from "next-auth/react";
-import { signOut } from "next-auth/react";
+//import { signOut } from "next-auth/react";
+import { auth, signIn, signOut } from "../../../auth";
 
-export default function Header() {
-  const { data: session } = useSession();
+function EndSession() {
+  return (
+    <form
+      action={async () => {
+        "use server";
+        await signOut();
+      }}
+    >
+      <button type="submit" className="text-[#F2E9E4] hover:underline">
+        Sign out
+      </button>
+    </form>
+  );
+}
+
+export default async function Header() {
+  const session = await auth();
+  console.log("session:" + session);
   return (
     <>
       <header className="p-2 bg-[#4A4E69] items-center flex flex-row flex-justify h-20 justify-between">
@@ -16,24 +31,17 @@ export default function Header() {
         </Link>
         {session ? (
           <div className="w-40 text-right">
-            <span>Hello, {JSON.stringify(session.user?.name)}</span>
-            <button
-              onClick={() => signOut()}
-              className="text-[#F2E9E4] hover:underline"
-            >
-              <UserIcon className="text-[#F2E9E4] size-3 inline me-1" />
-              Logout
-            </button>
+            <span className="text-[#F2E9E4] hover:underline">
+              Hello, {JSON.stringify(session.user?.name)}
+            </span>
+            <EndSession />
           </div>
         ) : (
           <div>
-            <Link
-              href="api/auth/signin"
-              className="text-[#F2E9E4] hover:underline"
-            >
+            <a href="/login" className="text-[#F2E9E4] hover:underline">
               <UserIcon className="text-[#F2E9E4] size-3 inline me-1" />
               Login
-            </Link>
+            </a>
           </div>
         )}
       </header>

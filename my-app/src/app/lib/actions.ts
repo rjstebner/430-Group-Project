@@ -5,6 +5,8 @@ import moment from "moment";
 //import { insertUser, insertSocialUser } from '../db/queries';
 import { redirect } from "next/navigation";
 import { newUser } from "../db/mongoQueries";
+import { signIn } from "../../../auth";
+import { AuthError } from "next-auth";
 
 function getCurrentDate() {
   const date = moment();
@@ -26,27 +28,21 @@ export async function createUser(formData: FormData) {
   redirect("/api/auth/signin");
 }
 
-export async function createSocialUserMongo(
-  name: string,
-  email: string,
-  picture: string
+export async function authenticate(
+  prevState: string | undefined,
+  formData: FormData
 ) {
-  console.log(picture);
-  const currentDate = getCurrentDate();
-  const data = {
-    name: name,
-    email: email,
-    picture: picture,
-    password: null,
-    type: "user",
-    socialLogin: true,
-    registration_dt: currentDate,
-  };
-
-  const result = await newUser(data);
-  if (result) {
-    return result;
-  } else {
-    return false;
+  try {
+    await signIn("credentials", formData);
+  } catch (error) {
+    if (error instanceof AuthError) {
+      switch (error.type) {
+        case "CredentialsSignin":
+          return "Invalid credentials.";
+        default:
+          return "Something went wrong.";
+      }
+    }
+    throw error;
   }
 }
