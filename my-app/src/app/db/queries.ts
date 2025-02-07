@@ -1,8 +1,6 @@
 import pool from './connection';
 import { Product } from './types/index';
 
-export{};
-
 
 export default pool;
 // Get all products query
