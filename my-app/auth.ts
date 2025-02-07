@@ -6,6 +6,22 @@ import type { NextAuthConfig } from "next-auth";
 import Credentials from "next-auth/providers/credentials";
 import { z } from "zod";
 
+declare module "next-auth" {
+  interface User {
+    // Add your additional properties here:
+    id?: string | null;
+    type?: string | null;
+  }
+}
+
+declare module "@auth/core/adapters" {
+  interface AdapterUser {
+    // Add your additional properties here:
+    id: string | null;
+    type: string | null;
+  }
+}
+
 export const {
   handlers: { GET, POST },
   auth,
@@ -36,7 +52,6 @@ export const {
               email: result.email,
               type: result.type,
             };
-            console.log("auth: " + user);
             return user;
           }
           console.log("invalid credentials");
@@ -45,4 +60,19 @@ export const {
       },
     }),
   ],
+  callbacks: {
+    jwt({ token, user }) {
+      if (user) {
+        // User is available during sign-in
+        token.id = user.id;
+        token.type = user.type;
+      }
+      return token;
+    },
+    session({ session, token }) {
+      session.user.id = token.id;
+      session.user.type = token.type;
+      return session;
+    },
+  },
 });

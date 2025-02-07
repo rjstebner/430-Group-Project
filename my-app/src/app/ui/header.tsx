@@ -22,7 +22,6 @@ function EndSession() {
 
 export default async function Header() {
   const session = await auth();
-  console.log("session:" + session);
   return (
     <>
       <header className="p-2 bg-[#4A4E69] items-center flex flex-row flex-justify h-20 justify-between">
