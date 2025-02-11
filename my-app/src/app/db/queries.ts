@@ -6,7 +6,7 @@ export async function fetchProducts() {
     try {
         const data = await pool.query(`
             SELECT *
-            FROM invoices
+            FROM products
         `);
         return data.rows
     } catch (error) {
