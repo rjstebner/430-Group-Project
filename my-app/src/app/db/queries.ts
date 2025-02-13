@@ -1,9 +1,7 @@
 import pool from './connection';
-import { Product } from './types/index';
+import { Product, User } from './types/index';
 
-
-export default pool;
-// Get all products query
+// Product-related queries
 export const getAllProducts = async (): Promise<Product[]> => {
     try {
         const result = await pool.query('SELECT * FROM products ORDER BY created_at DESC');
@@ -60,17 +58,57 @@ export const deleteProduct = async (id: number): Promise<boolean> => {
     }
 };
 
-
-//the place to put actions for accessing the db
-export const fetchProducts = async (): Promise<Product[]> => {
+// User-related queries
+export const getUser = async (email: string) => {
     try {
-        const data = await pool.query(`
-            SELECT *
-            FROM products
-        `);
-        return data.rows;
+        const result = await pool.query('SELECT * FROM users WHERE email = $1', [email]);
+        return result.rows[0];
     } catch (error) {
-        console.error('Database Error:', error);
-        throw new Error('Failed to fetch product data');
+        console.error("Failed to fetch user:", error);
+        throw new Error("Failed to fetch user.");
+    }
+};
+
+export async function insertUser(
+    name: string,
+    email: string,
+    password: string,
+    type: string,
+    registration_dt: string
+) {
+    try {
+        const result = await pool.query(
+            'INSERT INTO users (username, email, password, type) VALUES ($1, $2, $3, $4) RETURNING *',
+            [name, email, password, type]
+        );
+        console.log(`DB: user inserted successfully ${result.rows[0]}`);
+    } catch (err) {
+        console.error("Database failed to insert new user:", err);
     }
 }
+
+export async function insertSocialUser(
+    name: string,
+    email: string,
+    type: string,
+    registration_dt: string
+) {
+    try {
+        const result = await pool.query(
+            'INSERT INTO users (username, email, type) VALUES ($1, $2, $3) RETURNING *',
+            [name, email, type]
+        );
+        console.log(`DB: user inserted successfully ${result.rows[0]}`);
+    } catch (err) {
+        console.error("Database failed to insert new user:", err);
+    }
+}
+
+export const testConnection = async () => {
+    try {
+        const result = await pool.query("SELECT NOW()");
+        console.log("Database connected! Current time:", result.rows[0].now);
+    } catch (err) {
+        console.error("Database connection failed:", err);
+    }
+};

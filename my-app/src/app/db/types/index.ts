@@ -4,15 +4,16 @@ export interface User {
   email: string;
   password: string;
   type: string;
+  registration_dt: string;
 }
+
 export interface Review {
-    id: number;
-    product_id: number;
-    description: string;
-    rating: number;
-    created_at: Date;
+  id: number;
+  product_id: number;
+  description: string;
+  rating: number;
+  created_at: Date;
 }
-  
 
 export interface Product {
   id: number;
@@ -20,6 +21,7 @@ export interface Product {
   description: string;
   price: number;
   image: string;
+  reviews: Review[];
   created_at: Date;
   owner_id: number;
 }
