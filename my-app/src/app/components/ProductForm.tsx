@@ -4,6 +4,9 @@ import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { Product } from '../db/types';
 
+
+// Add ability to upload pictures
+
 type ProductFormProps = {
   product?: Product;
   mode: 'create' | 'edit';
