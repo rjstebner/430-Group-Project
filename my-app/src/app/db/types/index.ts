@@ -1,10 +1,10 @@
 export interface User {
-    id: number;
-    username: string;
-    email: string;
-    password: string;
-    type: string;
-  }
+  _id: string;  // Changed from number to string for MongoDB ObjectId
+  username: string;
+  email: string;
+  password: string;
+  type: string;
+}
 export interface Review {
     id: number;
     product_id: number;
