@@ -1,4 +1,5 @@
 "use client";
+import Link from "next/link";
 // import { useState } from "react";
 import * as React from "react";
 
@@ -11,12 +12,12 @@ export default function NavBar() {
         <nav className="navbar navbar-default">
           <div className="container-fluid">
             <div className="navbar-brand">
-              <a className="navbar-brand" href='/'></a>
+              <Link className="navbar-brand" href='/'></Link>
             </div>
             <ul className="nav navbar-nav">
-              <li><a href='/'>Home</a></li>
-              <li><a href='/catalog'>Catelog</a></li>
-              <li><a href='/account'>Account</a></li>
+              <li><Link href='/'>Home</Link></li>
+              <li><Link href='/catalog'>Catelog</Link></li>
+              <li><Link href='/account'>Account</Link></li>
             </ul>
           </div>
         </nav>
