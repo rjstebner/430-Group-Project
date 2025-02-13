@@ -1,9 +1,7 @@
 import HavenLogo from "@/app/ui/havenLogo";
 import Link from "next/link";
 import { UserIcon } from "@heroicons/react/24/solid";
-import { useSession } from "next-auth/react";
-//import { signOut } from "next-auth/react";
-import { auth, signIn, signOut } from "../../../auth";
+import { auth, signOut } from "../../../auth";
 
 function EndSession() {
   return (

@@ -14,18 +14,30 @@ function getCurrentDate() {
   return currentDate;
 }
 
-export async function createUser(formData: FormData) {
+export async function createUser(
+  prevState: string | undefined,
+  formData: FormData
+) {
   //safe parsing
-  const currentDate = getCurrentDate();
-  const { data } = validateCreateUserForm.safeParse({
-    name: formData.get("name"),
-    email: formData.get("email"),
-    password: bcrypt.hashSync(formData.get("password1"), 10),
-    type: "user",
-    registration_dt: currentDate,
-  });
-  newUser(data);
-  redirect("/api/auth/signin");
+  try {
+    const currentDate = getCurrentDate();
+    const validationResult = validateCreateUserForm.safeParse({
+      name: formData.get("name"),
+      email: formData.get("email"),
+      password: bcrypt.hashSync(formData.get("password1"), 10),
+      type: "user",
+      registration_dt: currentDate,
+    });
+    if (validationResult.success) {
+      newUser(validationResult.data);
+      redirect("/api/auth/signin");
+    } else {
+      return "Invalid New User Data!";
+    }
+  } catch (error) {
+    console.log("Create User error: " + error);
+    return "Something went wrong!";
+  }
 }
 
 export async function authenticate(

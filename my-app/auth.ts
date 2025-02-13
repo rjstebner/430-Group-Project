@@ -2,7 +2,6 @@ import NextAuth from "next-auth";
 import { authConfig } from "./auth.config";
 import bcrypt from "bcrypt";
 import { findUser } from "./src/app/db/mongoQueries";
-import type { NextAuthConfig } from "next-auth";
 import Credentials from "next-auth/providers/credentials";
 import { z } from "zod";
 
@@ -70,8 +69,8 @@ export const {
       return token;
     },
     session({ session, token }) {
-      session.user.id = token.id;
-      session.user.type = token.type;
+      session.user.id = token.id as string;
+      session.user.type = token.type as string;
       return session;
     },
   },
