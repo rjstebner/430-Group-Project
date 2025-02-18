@@ -12,7 +12,7 @@ export default async function CatalogCards() {
                     <p className="m-3 font-bold">{product.name}</p>
                     <p className="m-3">${product.price}</p>
                     <Image 
-                        src={product.image}
+                        src={product.image || '/images/placeholder.jpg'}
                         alt={`${product.name} image`}
                         width={200}
                         height={200}
