@@ -31,7 +31,7 @@ export default function CatalogCards({ products } : { products: Product[] }) {
                             height={200}
                             className="m-auto border border-solid border-gray-300"
                         />
-                        <a href="" className="block p-3 m-5 bg-blue-300 w-xs rounded-xl text-center">Product Details</a>
+                        <a href="" className="block p-3 m-5 bg-ultraViolet text-white w-xs rounded-xl text-center">Product Details</a>
                     </div>
                 ))}
             </div>
