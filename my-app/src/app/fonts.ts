@@ -1,4 +1,4 @@
-import { Playwrite_US_Trad, Roboto } from "next/font/google";
+import { Playwrite_VN, Roboto } from "next/font/google";
 
 export const playwrite_vn = Playwrite_VN({
   weight: '300',

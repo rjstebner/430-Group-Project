@@ -1,5 +1,4 @@
 "use client"
-import Image from "next/image";
 import { fetchProducts, fetchReviews } from "../db/queries"
 
 export default async function RatingsReviews() {
