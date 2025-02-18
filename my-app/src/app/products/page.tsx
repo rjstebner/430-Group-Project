@@ -1,9 +1,38 @@
-import { getAllProducts } from '../db/queries';
+import { getProductsByUserId } from '@/app/db/queries';
 import Link from 'next/link';
 import DeleteButton from '../components/DeleteButton';
+import { getServerSession } from 'next-auth/next';
+import { authOptions } from '../api/auth/[...nextauth]/route';
+import { redirect } from 'next/navigation';
 
-export default async function ProductsPage() {
-  const products = await getAllProducts();
+interface Params {
+  // Define the expected structure of params here
+}
+
+export default async function ProductsPage({ params }: { params: Params }) {
+  // Get the session using getServerSession
+  const session = await getServerSession(authOptions);
+  
+  // Check if the session is null or undefined
+  if (!session) {
+    // Redirect to the home page if not logged in
+    redirect('/');
+    return null; // Ensure the component does not render
+  }
+
+  // Additional type check for creator
+  if (typeof session.user.type !== 'string' || session.user.type !== 'creator') {
+    // Redirect to the home page if the user is not a creator
+    redirect('/');
+    return null; // Ensure the component does not render
+  }
+
+  // Fetch products by user ID
+  const userId = session.user.id;
+  if (typeof userId !== 'string') {
+    throw new Error('User ID is not a string');
+  }
+  const products = await getProductsByUserId(userId);
   
   return (
     <main className="p-24">
