@@ -21,3 +21,9 @@ nav, .nav, .navbar a {
   padding: 5px;
   width: 80px;
 }
+
+form {
+  height: 100%;
+  display: inline-block;
+}
+
