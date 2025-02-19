@@ -13,4 +13,4 @@ export default async function Home() {
       <CatalogCards products={products} />
     </div>
   );
-}\
+}

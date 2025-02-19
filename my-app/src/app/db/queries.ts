@@ -128,3 +128,16 @@ export async function fetchReviews() {
         throw new Error('Failed to fetch reviews data');
     }
 }
+
+export async function fetchProducts() {
+    try {
+        const data = await pool.query(`
+            SELECT *
+            FROM products
+        `);
+        return data.rows
+    } catch (error) {
+        console.error('Database Error: ', error);
+        throw new Error('Failed to fetch product data');
+    }
+}
