@@ -4,7 +4,7 @@ import { validateCreateUserForm } from "./validations";
 import moment from "moment";
 //import { insertUser, insertSocialUser } from '../db/queries';
 import { redirect } from "next/navigation";
-import { newUser } from "../db/mongoQueries";
+import { newUser, isRegistered } from "../db/mongoQueries";
 import { signIn } from "../../../auth";
 import { AuthError } from "next-auth";
 
@@ -29,8 +29,12 @@ export async function createUser(
       registration_dt: currentDate,
     });
     if (validationResult.success) {
-      newUser(validationResult.data);
-      redirect("/api/auth/signin");
+      const registeredEmail = await isRegistered(validationResult.data.email);
+      if (!registeredEmail) {
+        newUser(validationResult.data);
+      } else {
+        return "Email already registered!";
+      }
     } else {
       return "Invalid New User Data!";
     }
@@ -38,6 +42,7 @@ export async function createUser(
     console.log("Create User error: " + error);
     return "Something went wrong!";
   }
+  return redirect("/login");
 }
 
 export async function authenticate(
