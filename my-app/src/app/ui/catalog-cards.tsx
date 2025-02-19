@@ -6,7 +6,7 @@ export default async function CatalogCards() {
     const products = await fetchProducts();
 
     return (
-        <div className="md:grid grid-cols-3">
+        <div >
             {products.map(product => (
                 <div key={product.id} className="border border-solid bg-gray-100 p-5 m-4 rounded-xl">
                     <p className="m-3 font-bold">{product.name}</p>

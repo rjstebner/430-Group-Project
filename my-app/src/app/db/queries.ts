@@ -14,3 +14,18 @@ export async function fetchProducts() {
         throw new Error('Failed to fetch product data');
     }
 }
+
+//the place to fetch reviews from the db
+
+export async function fetchReviews() {
+    try {
+        const data = await pool.query(`
+            SELECT *
+            FROM reviews
+        `);
+        return data.rows
+    } catch (error) {
+        console.error('Database Error: ', error);
+        throw new Error('Failed to fetch review data');
+    }
+}

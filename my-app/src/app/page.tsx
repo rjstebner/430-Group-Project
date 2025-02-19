@@ -1,3 +1,4 @@
+import React from "react";
 import { playwrite_vn } from "./fonts";
 import CatalogCards from "./ui/catalog-cards";
 import NavBar from "./ui/nav-bar";

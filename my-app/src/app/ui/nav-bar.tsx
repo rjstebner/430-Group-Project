@@ -18,6 +18,7 @@ export default function NavBar() {
               <li><Link href='/'>Home</Link></li>
               <li><Link href='/catalog'>Catelog</Link></li>
               <li><Link href='/account'>Account</Link></li>
+              <li><Link href='/contact'>Contact Us</Link></li>
             </ul>
           </div>
         </nav>
