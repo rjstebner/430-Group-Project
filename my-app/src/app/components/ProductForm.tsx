@@ -3,7 +3,7 @@
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { Product } from '../db/types';
-
+import { getSession } from 'next-auth/react';
 
 // Add ability to upload pictures
 
@@ -22,6 +22,15 @@ export default function ProductForm({ product, mode }: ProductFormProps) {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+
+    // Get the session data
+    const session = await getSession();
+    if (!session) {
+      // Handle the case where the session is not available
+      console.error('User is not authenticated');
+      return;
+    }
+
     const url = mode === 'create' ? '/api/products' : `/api/products/${product?.id}`;
     const method = mode === 'create' ? 'POST' : 'PUT';
     
@@ -31,6 +40,7 @@ export default function ProductForm({ product, mode }: ProductFormProps) {
       body: JSON.stringify({
         ...formData,
         price: parseFloat(formData.price),
+        userId: session.user.id, // Include the user ID from the session
       }),
     });
     
