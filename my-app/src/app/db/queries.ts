@@ -116,19 +116,6 @@ export const testConnection = async () => {
     }
 }
 
-export async function fetchReviews() {
-    try {
-        const data = await pool.query(`
-            SELECT *
-            FROM reviews
-        `);
-        return data.rows
-    } catch (error) {
-        console.error('Database Error: ', error);
-        throw new Error('Failed to fetch reviews data');
-    }
-}
-
 export async function fetchProducts() {
     try {
         const data = await pool.query(`
