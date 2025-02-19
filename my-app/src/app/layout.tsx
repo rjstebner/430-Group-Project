@@ -13,8 +13,7 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Handcrafted Haven",
-  description: "A innovative marketplace for connecting artisans and crafters.",
+  title: "Handcrafted Haven"
 };
 
 export default function RootLayout({

@@ -1,4 +1,4 @@
-import pool from './connection';
+import { pool } from './connection';
 import { Product, User } from './types/index';
 
 // Product-related queries
@@ -114,4 +114,17 @@ export const testConnection = async () => {
     } catch (err) {
         console.error("Database connection failed:", err);
     }
-};
+}
+
+export async function fetchReviews() {
+    try {
+        const data = await pool.query(`
+            SELECT *
+            FROM reviews
+        `);
+        return data.rows
+    } catch (error) {
+        console.error('Database Error: ', error);
+        throw new Error('Failed to fetch reviews data');
+    }
+}
