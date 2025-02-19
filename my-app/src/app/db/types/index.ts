@@ -1,24 +1,27 @@
 export interface User {
-    id: number;
-    username: string;
-    email: string;
-    password: string;
-    type: string;
-  }
-export interface Review {
-    id: number;
-    product_id: number;
-    description: string;
-    rating: number;
-    created_at: Date;
+  _id: string;  // Changed from number to string for MongoDB ObjectId
+  username: string;
+  email: string;
+  password: string;
+  type: string;
+  registration_dt: string;
 }
-  
-  export interface Product {
-    id: number;
-    name: string;
-    description: string;
-    price: number;
-    image: string;
-    reviews: Review[];
-    created_at: Date;
-  }
+
+export interface Review {
+  id: number;
+  product_id: number;
+  description: string;
+  rating: number;
+  created_at: Date;
+}
+
+export interface Product {
+  id: number;
+  name: string;
+  description: string;
+  price: number;
+  image: string;
+  reviews: Review[];
+  created_at: Date;
+  owner_id: number;
+}
