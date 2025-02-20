@@ -34,7 +34,7 @@ export default async function EditProductPage({ params }: { params: Promise<{ id
 
   // Check if the product exists and if the user has permission to edit it
   if (!product) {
-    return <div>Product not found or you don't have permission to edit it</div>;
+    return <div>Product not found or you don&#39;t have permission to edit it</div>;
   }
 
   // Render the edit product page

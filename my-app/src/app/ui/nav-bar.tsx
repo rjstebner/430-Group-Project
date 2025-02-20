@@ -15,8 +15,7 @@ export default function NavBar() {
               <Link className="navbar-brand" href='/'></Link>
             </div>
             <ul className="nav navbar-nav">
-              <li><Link href='/'>Home</Link></li>
-              <li><Link href='/catalog'>Catelog</Link></li>
+              <li><Link href='/'>Catalog</Link></li>
               <li><Link href='/account'>Account</Link></li>
               <li><Link href='/contact'>Contact Us</Link></li>
             </ul>

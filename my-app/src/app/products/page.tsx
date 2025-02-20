@@ -6,11 +6,8 @@ import { authOptions } from '../api/auth/[...nextauth]/route';
 import { redirect } from 'next/navigation';
 import NavBar from '@/app/ui/nav-bar';
 
-interface Params {
-  // Define the expected structure of params here
-}
 
-export default async function ProductsPage({ params }: { params: Params }) {
+export default async function ProductsPage() {
   // Get the session using getServerSession
   const session = await getServerSession(authOptions);
   

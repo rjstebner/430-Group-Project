@@ -1,5 +1,5 @@
 import { pool } from './connection';
-import { Product, User } from './types/index';
+import { Product } from './types/index';
 
 // Product-related queries
 export const getAllProducts = async (): Promise<Product[]> => {
@@ -77,7 +77,6 @@ export async function insertUser(
     email: string,
     password: string,
     type: string,
-    registration_dt: string
 ) {
     try {
         const result = await pool.query(
@@ -94,7 +93,6 @@ export async function insertSocialUser(
     name: string,
     email: string,
     type: string,
-    registration_dt: string
 ) {
     try {
         const result = await pool.query(
