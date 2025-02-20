@@ -1,8 +1,5 @@
-<<<<<<< HEAD
 import React from "react";
-=======
 import { fetchProducts } from "./db/queries";
->>>>>>> bb85e4ef20d31c4308453e1bb1238e29a5e21bed
 import { playwrite_vn } from "./fonts";
 import CatalogCards from "./ui/catalog-cards";
 import NavBar from "./ui/nav-bar";

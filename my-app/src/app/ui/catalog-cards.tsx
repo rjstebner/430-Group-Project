@@ -11,24 +11,6 @@ export default function CatalogCards({ products } : { products: Product[] }) {
     })
 
     return (
-<<<<<<< HEAD
-        <div >
-            {products.map(product => (
-                <div key={product.id} className="border border-solid bg-gray-100 p-5 m-4 rounded-xl">
-                    <p className="m-3 font-bold">{product.name}</p>
-                    <p className="m-3">${product.price}</p>
-                    <Image 
-                        src={product.image}
-                        alt={`${product.name} image`}
-                        width={200}
-                        height={200}
-                        className="m-auto border border-solid border-gray-300"
-                    />
-                    <a href="" className="block p-3 m-5 bg-blue-300 w-xs rounded-xl text-center">Product Details</a>
-                </div>
-            ))}
-        </div>
-=======
         <>
             <input 
                 type="text" 
@@ -54,6 +36,5 @@ export default function CatalogCards({ products } : { products: Product[] }) {
                 ))}
             </div>
         </>
->>>>>>> bb85e4ef20d31c4308453e1bb1238e29a5e21bed
     )
 }
