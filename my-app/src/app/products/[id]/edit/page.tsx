@@ -1,4 +1,4 @@
-import { getProductsByUserId } from '@/app/db/queries';
+import { getAllProducts } from '@/app/db/queries';
 import ProductForm from '@/app/components/ProductForm';
 import { getServerSession } from 'next-auth/next';
 import { authOptions } from '@/app/api/auth/[...nextauth]/route';
@@ -8,28 +8,28 @@ export default async function EditProductPage({ params }: { params: Promise<{ id
   // Get the session using getServerSession
   const session = await getServerSession(authOptions);
   
+
+  // commented out the restricted access to creator only
   // Check if the session is null or undefined
-  if (!session) {
-    // Redirect to the home page if not logged in
-    redirect('/');
-    return null; // Ensure the component does not render
-  }
+  // if (!session) {
+  //   // Redirect to the home page if not logged in
+  //   redirect('/');
+  //   return null; // Ensure the component does not render
+  // }
 
   // Additional type check for creator
-  if (session.user.type !== 'creator') {
-    // Redirect to the home page if the user is not a creator
-    redirect('/');
-    return null; // Ensure the component does not render
-  }
+  // if (session.user.type !== 'creator') {
+  //   // Redirect to the home page if the user is not a creator
+  //   redirect('/');
+  //   return null; // Ensure the component does not render
+  // }
 
   // Extract the product ID from the params
-  const { id } = await params;
   // Fetch the product by user ID
-  const userId = session.user.id;
-  if (!userId) {
-    return <div>User ID is not available</div>;
-  }
-  const products = await getProductsByUserId(userId);
+  //const userId = session.user.id;
+  const { id } = await params;
+  const products = await getAllProducts();
+
   const product = products.find((p) => p.id === Number(id));
 
   // Check if the product exists and if the user has permission to edit it
