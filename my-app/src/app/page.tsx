@@ -1,6 +1,6 @@
-import { fetchProducts } from "./db/queries";
-import { playwrite_vn } from "./fonts";
-import CatalogCards from "./ui/catalog-cards";
+import { fetchProducts } from './db/mongoQueries';
+import { playwrite_vn } from './fonts';
+import CatalogCards from './ui/catalog-cards';
 
 export default async function Home() {
   const products = await fetchProducts();

@@ -1,6 +1,5 @@
 export interface User {
-  _id: string;  // Changed from number to string for MongoDB ObjectId
-  username: string;
+  name: string;
   email: string;
   password: string;
   type: string;

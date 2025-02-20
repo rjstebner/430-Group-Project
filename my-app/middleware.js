@@ -1,5 +1,5 @@
-import { withAuth } from "next-auth/middleware";
-import { NextResponse } from "next/server";
+import { withAuth } from 'next-auth/middleware';
+import { NextResponse } from 'next/server';
 
 export default withAuth(
   function middleware(req) {
@@ -28,5 +28,5 @@ export default withAuth(
 
 // Make sure to catch all product edit routes
 export const config = {
-  matcher: ['/products/:path*/edit']
+  matcher: ['/products/:path*/edit'],
 };

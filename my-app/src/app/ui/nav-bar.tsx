@@ -1,27 +1,58 @@
-"use client";
-import Link from "next/link";
+import Link from 'next/link';
 // import { useState } from "react";
-import * as React from "react";
+import HavenLogo from '@/app/ui/havenLogo';
+import { UserIcon } from '@heroicons/react/24/solid';
+import { auth, signOut } from '../../../auth';
 
 // interface NavBarProps {
 // }
 
-export default function NavBar() {
-    return (
-      <div>
-        <nav className="navbar navbar-default">
-          <div className="container-fluid">
-            <div className="navbar-brand">
-              <Link className="navbar-brand" href='/'></Link>
-            </div>
-            <ul className="nav navbar-nav w-100">
-              <li><Link href='/'>Catalog</Link></li>
-              <li><Link href='/admin'>Admin</Link></li>
-              <li><Link href='/contact'>Contact Us</Link></li>
-              <li><Link href='/login'>Login</Link></li>
-            </ul>
+function EndSession() {
+  return (
+    <form
+      action={async () => {
+        'use server';
+        await signOut();
+      }}
+    >
+      <button type="submit" className="hover:underline">
+        Sign out
+      </button>
+    </form>
+  );
+}
+
+export default async function NavBar() {
+  const session = await auth();
+  return (
+    <div className="border-b-2 border-[#4A4E69]">
+      <nav className="p-2  items-center w-full flex h-20 justify-around bb">
+        <HavenLogo />
+        <div>
+          <Link href="/">Catalog</Link>
+        </div>
+        <div>
+          <Link href="/admin">Admin</Link>
+        </div>
+        <div>
+          <Link href="/contact">Contact Us</Link>
+        </div>
+        {session ? (
+          <div className="w-40 text-right">
+            <span className="hover:underline">
+              Hello, {JSON.stringify(session.user?.name)}
+            </span>
+            <EndSession />
           </div>
-        </nav>
-      </div>
-    )
+        ) : (
+          <div>
+            <a href="/login" className="hover:underline">
+              <UserIcon className="size-3 inline me-1" />
+              Login
+            </a>
+          </div>
+        )}
+      </nav>
+    </div>
+  );
 }

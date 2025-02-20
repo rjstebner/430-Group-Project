@@ -1,11 +1,11 @@
-import NextAuth from "next-auth";
-import { authConfig } from "./auth.config";
-import bcrypt from "bcrypt";
-import { findUser } from "./src/app/db/mongoQueries";
-import Credentials from "next-auth/providers/credentials";
-import { z } from "zod";
+import NextAuth from 'next-auth';
+import { authConfig } from './auth.config';
+import bcrypt from 'bcrypt';
+import { findUser } from './src/app/db/mongoQueries';
+import Credentials from 'next-auth/providers/credentials';
+import { z } from 'zod';
 
-declare module "next-auth" {
+declare module 'next-auth' {
   interface User {
     // Add your additional properties here:
     id?: string | null;
@@ -13,7 +13,7 @@ declare module "next-auth" {
   }
 }
 
-declare module "@auth/core/adapters" {
+declare module '@auth/core/adapters' {
   interface AdapterUser {
     // Add your additional properties here:
     id: string | null;
@@ -29,7 +29,7 @@ export const {
 } = NextAuth({
   ...authConfig,
   session: {
-    strategy: "jwt",
+    strategy: 'jwt',
   },
   providers: [
     Credentials({
@@ -53,7 +53,7 @@ export const {
             };
             return user;
           }
-          console.log("invalid credentials");
+          console.log('invalid credentials');
           return null;
         }
       },
