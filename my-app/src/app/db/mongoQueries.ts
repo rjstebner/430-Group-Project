@@ -29,7 +29,16 @@ export const findUser = async (email: string) => {
   }
 };
 
-export const newUser = async (values: any) => {
+interface UserType {
+  name: string;
+  email: string;
+  type: string;
+  picture: string,
+  password: string;
+  registration_dt: string;
+}
+
+export const newUser = async (values: UserType) => {
   const data = {
     name: values.name,
     email: values.email,
